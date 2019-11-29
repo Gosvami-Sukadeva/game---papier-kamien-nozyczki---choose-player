@@ -1,24 +1,23 @@
 const gameSummary = {
-    numbers: 0,
-    wins: 0,
-    losses: 0,
-    draws: 0,
-}
+  numbers: 0,
+  wins: 0,
+  losses: 0,
+  draws: 0
+};
 
 const game = {
-    playerHand: "",
-    aiHand: "",
-}
+  playerHand: "",
+  aiHand: ""
+};
 
-const hands = [...document.querySelectorAll('.select img')];
+const hands = [...document.querySelectorAll(".select img")];
 
 // Pierwsza funkcja
 function handSelection() {
-
-    game.playerHand = this.dataset.option
-    console.log(game.playerHand);
-    hands.forEach(hand => hand.style.boxShadow = '');
-    this.style.boxShadow = '0 0 0 4px red';
+  game.playerHand = this.dataset.option;
+  console.log(game.playerHand);
+  hands.forEach(hand => (hand.style.boxShadow = ""));
+  this.style.boxShadow = "0 0 0 4px red";
 }
 
 // const handSelection = (e) => {
@@ -26,5 +25,17 @@ function handSelection() {
 //  console.log(e.target);
 //  console.log(e.currentTarget);
 // }
+function aiChoice() {
+  return hands[Math.floor(Math.random() * 3)].dataset.option;
+}
 
-hands.forEach(hand => hand.addEventListener('click', handSelection))
+//funkcja sterująca
+function startGame() {
+  if (!game.playerHand) {
+    return alert("wybierz dłoń!!!!");
+  }
+  game.aiHand = aiChoice();
+}
+
+document.querySelector(".start").addEventListener("click", startGame);
+hands.forEach(hand => hand.addEventListener("click", handSelection));
