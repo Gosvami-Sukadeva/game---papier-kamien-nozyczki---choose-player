@@ -29,12 +29,29 @@ function aiChoice() {
   return hands[Math.floor(Math.random() * 3)].dataset.option;
 }
 
+function checkResult(player, ai) {
+  // console.log(player, ai);
+  if (player === ai) {
+    return "draw";
+  } else if (
+    (player === "papier" && ai === "kamień") ||
+    (player === "kamień" && ai === "nożyczki") ||
+    (player === "nożyczki" && ai === "papier")
+  ) {
+    return "win";
+  } else {
+    return "loss";
+  }
+}
+
 //funkcja sterująca
 function startGame() {
   if (!game.playerHand) {
     return alert("wybierz dłoń!!!!");
   }
   game.aiHand = aiChoice();
+  const gameResult = checkResult(game.playerHand, game.aiHand);
+  console.log(gameResult);
 }
 
 document.querySelector(".start").addEventListener("click", startGame);
