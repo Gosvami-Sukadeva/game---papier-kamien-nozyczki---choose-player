@@ -70,6 +70,12 @@ function publishResult(player, ai, result) {
     document.querySelector('[data-summary="who-win"]').style.color = "gray";
   }
 }
+function endGame() {
+  document.querySelector(`[data-option="${game.playerHand}"]`).style.boxShadow =
+    "";
+  game.playerHand = "";
+  game.aiHand = "";
+}
 //funkcja sterująca
 function startGame() {
   if (!game.playerHand) {
@@ -79,6 +85,7 @@ function startGame() {
   const gameResult = checkResult(game.playerHand, game.aiHand);
   console.log(gameResult);
   publishResult(game.playerHand, game.aiHand, gameResult);
+  endGame();
 }
 
 document.querySelector(".start").addEventListener("click", startGame);
